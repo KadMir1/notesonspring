@@ -10,29 +10,28 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "note")
-public class Note implements Comparable<Note> {
-    
+@Table(name = "notes")
+public class Note  implements Comparable<Note>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "text")
-    @NotBlank(message = "Не может быть пустой")
-    @Size(max = 80, message = "Превышен лимит в 80 символов")
+    @NotBlank(message="Заметка не может быть пустой")
+    @Size(max=255, message="Превышен лимит в 255 символов")
     private String text;
 
-    @Column(name = "last_date")
-    private LocalDateTime lastDate;
+    @Column(name = "last_change")
+    private LocalDateTime lastChange;
 
-    @Column(name = "favourites")
-    private Boolean favourites;
+    @Column(name = "important")
+    private Boolean important;
 
     @Override
     public int compareTo(Note otherNote) {
-        if(getLastDate() == null || otherNote.getLastDate() == null) {
+        if (getLastChange() == null || otherNote.getLastChange() == null){
             return -1;
         }
-        return otherNote.getLastDate().compareTo(getLastDate());
+        return otherNote.getLastChange().compareTo(getLastChange());
     }
 }

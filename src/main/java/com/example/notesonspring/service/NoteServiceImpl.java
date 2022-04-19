@@ -1,45 +1,44 @@
 package com.example.notesonspring.service;
 
+import java.util.Collections;
 import java.util.List;
 
-import com.example.notesonspring.dao.NoteDAO;
 import com.example.notesonspring.entity.Note;
+import com.example.notesonspring.repository.NoteRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class NoteServiceImpl implements NoteService{
+public class NoteServiceImpl implements NoteService {
+
+    private final NoteRepository noteRepository;
 
     @Autowired
-    private NoteDAO noteDAO;
+    public NoteServiceImpl(NoteRepository noteRepository) {
+        this.noteRepository = noteRepository;
+    }
 
-    @Override
-    @Transactional
-    public Note findById(Long id) {
-        return noteDAO.findById(id);
+    public Note findById(Long id){
+        return noteRepository.getById(id);
+    }
+
+    public List<Note> findAll(){
+        List<Note> result = noteRepository.findAll();
+        Collections.sort(result);
+        return result;
     }
 
     @Override
-    public List<Note> findAll() {
-        return noteDAO.findAll();
+    public List<Note> findImportantNotes() {
+        return noteRepository.getNoteByImportantTrue();
     }
 
-    @Override
-    public List<Note> findFavouritesNotes() {
-        return noteDAO.findFavouritesNotes();
+    public void saveNote(Note note){
+        noteRepository.save(note);
     }
 
-    @Override
-    public void saveNote(Note note) {
-        noteDAO.saveNote(note);
-        
+    public void deleteById(Long id){
+        noteRepository.deleteById(id);
     }
-
-    @Override
-    public void deleteById(Long id) {
-        noteDAO.deleteById(id);
-        
-    }  
 }
