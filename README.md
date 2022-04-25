@@ -12,8 +12,7 @@
 <li>Hibernate
 <li>MySQL
   
-##Скриншоты
-
+#Скриншоты
 <br>
 <img src="https://user-images.githubusercontent.com/63846369/165049512-43751931-6741-4460-86fd-3a104e041027.jpg">
 <br>
