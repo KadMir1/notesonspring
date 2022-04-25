@@ -8,6 +8,7 @@
 
 Технологии:
 <li>Spring MVC
+<li>Spring Data JPA
 <li>Thymeleaf
 <li>Hibernate
 <li>MySQL
